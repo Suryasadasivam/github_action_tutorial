@@ -14,4 +14,9 @@ jobs:
         steps:
             - name : print good bye
               run : echo "thank you good bye"
-            
+
+    my-third-job:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: print trigger event name
+              run: echo "${{github.event_name}}"
