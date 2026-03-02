@@ -1,0 +1,24 @@
+name: python_action_practice
+
+on:  workflow_dispatch
+
+jobs:
+    my_first_python_job:
+         runs-on: ubuntu-latest
+         defaults:
+            run:
+                working-directory: python_folder
+         steps:
+            #check out the code 
+            - name: check out the code from repo
+              uses: actions/checkout@v4
+
+            - name: setup python
+              uses: actions/setup-python@v5
+              with:
+                 python-version: '3.11'
+
+            - name : run python scripts
+              run: python app.py 
+                
+
