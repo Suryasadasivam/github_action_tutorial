@@ -7,7 +7,7 @@ jobs:
          runs-on: ubuntu-latest
          defaults:
             run:
-                working-directory: python_folder
+                working-directory: python_code
          steps:
             #check out the code 
             - name: check out the code from repo
