@@ -1,0 +1,29 @@
+name: event_activity_trigger
+
+on: 
+    push:
+      branches:
+       -  main
+      paths-ignore:
+        - ReadMe.md 
+
+jobs:
+    my_job_for_event:
+        runs-on: ubuntu-latest
+        defaults:
+            run: 
+               working-directory: python_code
+        steps:
+            - name: checkout code 
+              uses: actions/checkout@v4
+
+            - name : set up python 
+              uses : actions/setup-python@v5
+              with :
+                  python_version: "3.11"
+
+            - name : run pythonscripts
+              run : python app.py
+
+
+
