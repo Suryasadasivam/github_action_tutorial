@@ -1,0 +1,43 @@
+name: context_yaml
+
+on:
+    push: 
+        branches:
+          - main
+        paths-ignore:
+            - ReadMe.md
+
+
+
+jobs:
+    my-first-job-for-context:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: python_code
+        
+        steps:
+            - name: my-first-step
+              uses: actions/checkout@v4
+
+            - name: python-setup
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.11'
+
+            - name : run pythonscripts
+              run : python app.py
+
+            - name: Display information
+              run : |
+                   echo "Event name : ${{github.event_name}}"
+                   echo "Ref : ${{github.ref}}"
+                   echo "SHA : ${{github.sha}}"
+                   echo "Actor : ${{github.actor}}"
+                   echo "Workflow : ${{github.workflow}}"
+                   echo "Run ID : ${{github.run_id}}"
+                   echo "Run number : ${{github.run_number}}"
+
+            - name: variable information from repo level
+              run: |
+                echo "repolevel: ${{ vars.VARIABLE }}"
