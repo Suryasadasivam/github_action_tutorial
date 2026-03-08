@@ -2,6 +2,10 @@ name: context_yaml
 
 run-name: 06 - Contexts | DEBUG - ${{ inputs.debug }}
 
+env:
+  MY_WORKFLOW_VAR: workflow
+  MY_OVERWRITTEN_VAR: workflow
+
 on:
     workflow_dispatch:
         inputs:
@@ -13,6 +17,9 @@ on:
 jobs:
     my-first-job-for-context:
         runs-on: ubuntu-latest
+        env:
+            MY_JOB_VAR: job
+            MY_OVERWRITTEN_VAR: job
         defaults:
             run:
                 working-directory: python_code
@@ -42,3 +49,12 @@ jobs:
             - name: variable information from repo level
               run: |
                 echo "repolevel: ${{ vars.VARIABLE }}"
+
+            - name: Print Env Variables
+              env:
+                MY_OVERWRITTEN_VAR: step
+              run: |
+                    echo "Workflow env: $MY_WORKFLOW_VAR"
+                    echo "Overwritten env: $MY_OVERWRITTEN_VAR"
+
+        
