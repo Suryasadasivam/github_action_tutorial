@@ -1,12 +1,7 @@
 name: event_activity_trigger
 
 on: 
-    push:
-      branches:
-       -  main
-      paths-ignore:
-        - ReadMe.md 
-
+    workflow_dispatch
 jobs:
     my_job_for_event:
         runs-on: ubuntu-latest
