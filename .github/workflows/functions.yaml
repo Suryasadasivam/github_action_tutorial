@@ -21,11 +21,8 @@ jobs:
 
             - name: execute code 
               run : python app.py
-              
-            - name: fail_function
-              run : exit 1
             
-            - name: skipped step 
+            - name: success step 
               if : ${{success()}}
               run : echo "I will print the sucessed step"
 
@@ -33,6 +30,6 @@ jobs:
               if : ${{failure()}}
               run : echo "i will print if the step failed"
 
-              
+
 
 
