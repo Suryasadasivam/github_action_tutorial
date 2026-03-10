@@ -1,0 +1,38 @@
+name: function_testing 
+
+on:
+   workflow_dispatch
+
+jobs:
+    my-fist-job:
+        runs-on: ubuntu-latest
+        defaults: 
+            run:
+                working-directory: python_code
+
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v4
+            
+            - name: setup python 
+              uses: actions/setup-python@v5
+              with : 
+                python-version: "3.11"
+
+            - name: execute code 
+              run : python app.py
+              
+            - name: fail_function
+              run : exit 1
+            
+            - name: skipped step 
+              if : ${{success()}}
+              run : echo "I will print the sucessed step"
+
+            - name: I will execute
+              if : ${{failure()}}
+              run : echo "i will print if the step failed"
+
+              
+
+
