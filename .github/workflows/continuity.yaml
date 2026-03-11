@@ -1,0 +1,42 @@
+name: contunitiy-test
+
+on: 
+    workflow_dispatch:
+        inputs:
+            pass-on-unit-test:
+                description: "should be pass?"
+                type: boolean
+                default: false
+
+
+jobs:
+    my-first-job:
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+            working-directory: python_code
+      
+      steps:
+        - name: code checkout
+          uses : actions/checkout@v4
+
+        - name : setup-python 
+          uses: actions/setup-python@v5
+          with: 
+              python-version: "3.11"
+
+    my-second-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Running unit tests
+              run: echo "Running tests..."
+
+            - name: Failing tests
+              if: ${{ inputs.pass-on-unit-test == false }}
+              run: exit 1
+    
+    my-third-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name:  executing python
+              run: python app.py         
