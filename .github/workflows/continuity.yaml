@@ -12,9 +12,6 @@ on:
 jobs:
     my-first-job:
       runs-on: ubuntu-latest
-      defaults:
-        run:
-            working-directory: python_code
       
       steps:
         - name: code checkout
@@ -39,6 +36,9 @@ jobs:
     
     my-third-job:
         runs-on: ubuntu-latest
+        defaults:
+         run:
+            working-directory: python_code
         needs: my-first-job   # optional, to enforce order
         steps:
             - name:  executing python
