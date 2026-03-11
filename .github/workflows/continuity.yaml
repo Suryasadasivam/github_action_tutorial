@@ -33,11 +33,13 @@ jobs:
               run: echo "Running tests..."
 
             - name: Failing tests
-              if: ${{ inputs.pass-on-unit-test == false }}
+              if: ${{ github.event.inputs['pass-on-unit-test'] == false }}
               run: exit 1
+             
     
     my-third-job:
         runs-on: ubuntu-latest
+        needs: my-first-job   # optional, to enforce order
         steps:
             - name:  executing python
               run: python app.py         
